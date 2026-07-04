@@ -23,11 +23,10 @@ export default function LeadCapture({ results, onSubmit }) {
     if (validate()) {
       const leadData = { name: name.trim(), email: email.trim() }
       try {
-        fetch('https://api.convertkit.com/v3/forms/9615127/subscribe', {
+        fetch('/api/subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            api_key: '92flaYD2pveEAMoH-ZdP4Q',
             email: email.trim(),
             first_name: name.trim()
           })
