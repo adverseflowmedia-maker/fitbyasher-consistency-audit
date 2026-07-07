@@ -2,13 +2,13 @@ import { useState } from 'react'
 import ConsistencyDial from './ConsistencyDial.jsx'
 
 export default function LeadCapture({ results, onSubmit }) {
-  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [errors, setErrors] = useState({})
 
   const validate = () => {
     const next = {}
-    if (!name.trim()) next.name = 'Enter your name to continue'
+    if (!username.trim()) next.username = 'Enter your Instagram username to continue'
     if (!email.trim()) {
       next.email = 'Enter your email to continue'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
@@ -21,14 +21,14 @@ export default function LeadCapture({ results, onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (validate()) {
-      const leadData = { name: name.trim(), email: email.trim() }
+      const leadData = { username: username.trim(), email: email.trim() }
       try {
         fetch('https://script.google.com/macros/s/AKfycbwMhDtSNxcD2pYRop83IaqKS3nZArmSjHW8oWxdcViMc479bXTg1Rp2KfPMyeKlAIoPHg/exec', {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: name.trim(),
+            username: username.trim(),
             email: email.trim(),
             date: new Date().toISOString()
           })
@@ -46,29 +46,29 @@ export default function LeadCapture({ results, onSubmit }) {
         </div>
         <div className="eyebrow mb-3">Your Audit Is Ready</div>
         <h1 className="font-display font-bold text-2xl sm:text-[1.8rem] text-ink leading-snug">
-          Get Your Personalized Consistency Roadmap
+          One last step to unlock your results
         </h1>
         <p className="mt-3 text-sm text-ink-mute leading-relaxed">
-          Enter your details to unlock your full breakdown, your consistency type, and your 7-day reset plan.
+          Enter your details below to unlock your full personalised report.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 animate-fadeUp" style={{ animationDelay: '0.1s' }}>
         <div className="flex flex-col gap-4">
           <div>
-            <label htmlFor="name" className="block text-xs font-mono uppercase tracking-wide text-ink-mute mb-2">
-              First Name
+            <label htmlFor="username" className="block text-xs font-mono uppercase tracking-wide text-ink-mute mb-2">
+              Instagram Username
             </label>
             <input
-              id="name"
+              id="username"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Asher"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="@asher"
               className={`w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border text-ink placeholder:text-ink-mute/50 outline-none transition-colors duration-200
-                ${errors.name ? 'border-rose-400/60' : 'border-white/10 focus:border-emerald-glow/60'}`}
+                ${errors.username ? 'border-rose-400/60' : 'border-white/10 focus:border-emerald-glow/60'}`}
             />
-            {errors.name && <p className="mt-1.5 text-xs text-rose-400">{errors.name}</p>}
+            {errors.username && <p className="mt-1.5 text-xs text-rose-400">{errors.username}</p>}
           </div>
 
           <div>
@@ -88,7 +88,7 @@ export default function LeadCapture({ results, onSubmit }) {
           </div>
 
           <button type="submit" className="btn-primary w-full mt-2">
-            Unlock My Full Report
+            Show My Results
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
