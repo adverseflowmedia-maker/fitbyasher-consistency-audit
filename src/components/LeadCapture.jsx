@@ -23,13 +23,14 @@ export default function LeadCapture({ results, onSubmit }) {
     if (validate()) {
       const leadData = { name: name.trim(), email: email.trim() }
       try {
-        fetch('https://app.convertkit.com/forms/9615127/subscriptions', {
+        fetch('https://script.google.com/macros/s/AKfycbwMhDtSNxcD2pYRop83IaqKS3nZArmSjHW8oWxdcViMc479bXTg1Rp2KfPMyeKlAIoPHg/exec', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            api_key: '92flaYD2pveEAMoH-ZdP4Q',
-            email_address: email.trim(),
-            first_name: name.trim()
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            date: new Date().toISOString()
           })
         })
       } catch (_) {}
